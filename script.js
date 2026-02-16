@@ -263,55 +263,62 @@ document.addEventListener('DOMContentLoaded', function () {
     var modalClose = document.getElementById('modal-close');
 
     var projectsData = {
-        1: {
-            title: 'Residência — São Paulo, SP',
-            img: 'img/project1.webp',
-            kwp: '8.5 kWp',
-            telhado: 'Cerâmico',
-            geracao: '~1.100 kWh/mês',
-            economia: '~R$ 850/mês'
-        },
-        2: {
-            title: 'Comércio — Campinas, SP',
-            img: 'img/project2.jpg',
-            kwp: '22 kWp',
-            telhado: 'Metálico',
-            geracao: '~2.860 kWh/mês',
-            economia: '~R$ 2.200/mês'
-        },
-        3: {
-            title: 'Residência — Ribeirão Preto, SP',
-            img: 'img/project3.jpg',
-            kwp: '5.4 kWp',
-            telhado: 'Cerâmico',
-            geracao: '~700 kWh/mês',
-            economia: '~R$ 540/mês'
-        },
-        4: {
-            title: 'Indústria — Sorocaba, SP',
-            img: 'img/project4.jpg',
-            kwp: '45 kWp',
-            telhado: 'Metálico',
-            geracao: '~5.850 kWh/mês',
-            economia: '~R$ 4.500/mês'
-        },
-        5: {
-            title: 'Propriedade Rural — Bauru, SP',
-            img: 'img/project5.jpg',
-            kwp: '15 kWp',
-            telhado: 'Solo',
-            geracao: '~1.950 kWh/mês',
-            economia: '~R$ 1.500/mês'
-        },
-        6: {
-            title: 'Residência — Jundiaí, SP',
-            img: 'img/hero-bg.jpg',
-            kwp: '10.2 kWp',
-            telhado: 'Laje',
-            geracao: '~1.326 kWh/mês',
-            economia: '~R$ 1.020/mês'
-        }
-    };
+
+    1: {
+        title: 'Residência — Itumbiara, GO',
+        img: 'project 1.jpg',
+        kwp: '6,5 kWp',
+        telhado: 'Cerâmico',
+        geracao: '~930 kWh/mês',
+        economia: '~R$ 880/mês'
+    },
+
+    2: {
+        title: 'Comércio — Itumbiara, GO',
+        img: 'project 2.jpg',
+        kwp: '2,2 kWp',
+        telhado: 'Cerâmico • Microinversor',
+        geracao: '~315 kWh/mês',
+        economia: '~R$ 300/mês'
+    },
+
+    3: {
+        title: 'Residência — Araporã, MG',
+        img: 'project 3.png',
+        kwp: '4,4 kWp',
+        telhado: 'Fibrocimento',
+        geracao: '~630 kWh/mês',
+        economia: '~R$ 600/mês'
+    },
+
+    4: {
+        title: 'Goiatuba, GO',
+        img: 'project 4.webp',
+        kwp: '8,8 kWp',
+        telhado: 'Laje',
+        geracao: '~1.276 kWh/mês',
+        economia: '~R$ 1.210/mês'
+    },
+
+    5: {
+        title: 'Cachoeira Dourada — GO',
+        img: 'project 5.jpg',
+        kwp: '4,4 kWp',
+        telhado: 'Cerâmico',
+        geracao: '~630 kWh/mês',
+        economia: '~R$ 600/mês'
+    },
+
+    6: {
+        title: 'Residência — Cachoeira Dourada, GO',
+        img: 'project 6.jpg',
+        kwp: '27 kWp',
+        telhado: 'Cerâmico',
+        geracao: '~3.900 kWh/mês',
+        economia: '~R$ 3.700/mês'
+    }
+
+};
 
     document.querySelectorAll('.project-btn').forEach(function (btn) {
         btn.addEventListener('click', function () {
@@ -354,143 +361,171 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     // ===== COUNTER ANIMATION =====
-    var counters = document.querySelectorAll('.diff-number');
-    var countersAnimated = false;
+var counters = document.querySelectorAll('.diff-number');
+var countersAnimated = false;
 
-    function animateCounters() {
-        if (countersAnimated) return;
+function animateCounters() {
+  if (countersAnimated) return;
 
-        var diffSection = document.getElementById('diferenciais');
-        if (!diffSection) return;
+  var diffSection = document.getElementById('diferenciais');
+  if (!diffSection) return;
 
-        var sectionTop = diffSection.getBoundingClientRect().top;
-        if (sectionTop < window.innerHeight - 100) {
-            countersAnimated = true;
+  var sectionTop = diffSection.getBoundingClientRect().top;
+  if (sectionTop < window.innerHeight - 100) {
+    countersAnimated = true;
 
-            counters.forEach(function (counter) {
-                var target = parseInt(counter.getAttribute('data-count'));
-                var duration = 2000;
-                var start = 0;
-                var startTime = null;
+    counters.forEach(function (counter) {
+      var target = parseInt(counter.getAttribute('data-count'));
+      var duration = 2000;
+      var startTime = null;
 
-                function easeOutQuart(t) {
-                    return 1 - Math.pow(1 - t, 4);
-                }
+      function easeOutQuart(t) {
+        return 1 - Math.pow(1 - t, 4);
+      }
 
-                function updateCounter(timestamp) {
-                    if (!startTime) startTime = timestamp;
-                    var progress = Math.min((timestamp - startTime) / duration, 1);
-                    var easedProgress = easeOutQuart(progress);
-                    var current = Math.floor(easedProgress * target);
-                    counter.textContent = current;
+      function updateCounter(timestamp) {
+        if (!startTime) startTime = timestamp;
+        var progress = Math.min((timestamp - startTime) / duration, 1);
+        var easedProgress = easeOutQuart(progress);
+        var current = Math.floor(easedProgress * target);
+        counter.textContent = current;
 
-                    if (progress < 1) {
-                        requestAnimationFrame(updateCounter);
-                    } else {
-                        counter.textContent = target;
-                    }
-                }
-
-                if (target > 0) {
-                    requestAnimationFrame(updateCounter);
-                }
-            });
+        if (progress < 1) {
+          requestAnimationFrame(updateCounter);
+        } else {
+          counter.textContent = target;
         }
+      }
+
+      if (target > 0) {
+        requestAnimationFrame(updateCounter);
+      }
+    });
+  }
+}
+
+window.addEventListener('scroll', animateCounters);
+// (opcional) já anima caso a seção esteja visível ao carregar:
+window.addEventListener('load', animateCounters);
+
+// ===== CONTACT FORM (STATIC) -> SEND TO WHATSAPP =====
+var contactForm = document.getElementById('contact-form');
+var formSuccess = document.getElementById('form-success');
+
+// Número do WhatsApp do cliente (recebedor)
+var WHATSAPP_NUMBER = "5564992251274";
+
+if (contactForm) {
+  contactForm.addEventListener('submit', function (e) {
+    e.preventDefault();
+
+    var isValid = true;
+
+    // Clear previous errors
+    contactForm.querySelectorAll('.error').forEach(function (el) {
+      el.classList.remove('error');
+    });
+    contactForm.querySelectorAll('.form-error').forEach(function (el) {
+      el.textContent = '';
+    });
+    if (formSuccess) formSuccess.classList.add('hidden');
+
+    // Validate nome
+    var nome = document.getElementById('c-nome');
+    if (!nome.value.trim() || nome.value.trim().length < 3) {
+      showError(nome, 'Por favor, insira seu nome (mínimo 3 letras).');
+      isValid = false;
     }
 
-    window.addEventListener('scroll', animateCounters);
-
-    // ===== CONTACT FORM VALIDATION =====
-    var contactForm = document.getElementById('contact-form');
-    var formSuccess = document.getElementById('form-success');
-
-    if (contactForm) {
-        contactForm.addEventListener('submit', function (e) {
-            e.preventDefault();
-
-            var isValid = true;
-
-            // Clear previous errors
-            contactForm.querySelectorAll('.error').forEach(function (el) {
-                el.classList.remove('error');
-            });
-            contactForm.querySelectorAll('.form-error').forEach(function (el) {
-                el.textContent = '';
-            });
-
-            // Validate nome
-            var nome = document.getElementById('c-nome');
-            if (!nome.value.trim() || nome.value.trim().length < 3) {
-                showError(nome, 'Por favor, insira seu nome completo.');
-                isValid = false;
-            }
-
-            // Validate whatsapp
-            var whatsapp = document.getElementById('c-whatsapp');
-            var whatsappClean = whatsapp.value.replace(/\D/g, '');
-            if (whatsappClean.length < 10 || whatsappClean.length > 11) {
-                showError(whatsapp, 'Insira um número de WhatsApp válido.');
-                isValid = false;
-            }
-
-            // Validate cidade
-            var cidade = document.getElementById('c-cidade');
-            if (!cidade.value.trim()) {
-                showError(cidade, 'Por favor, insira sua cidade.');
-                isValid = false;
-            }
-
-            // Validate tipo
-            var tipo = document.getElementById('c-tipo');
-            if (!tipo.value) {
-                showError(tipo, 'Selecione o tipo do projeto.');
-                isValid = false;
-            }
-
-            if (isValid) {
-                // Simular envio
-                var submitBtn = contactForm.querySelector('button[type="submit"]');
-                submitBtn.textContent = 'Enviando...';
-                submitBtn.disabled = true;
-
-                setTimeout(function () {
-                    contactForm.reset();
-                    formSuccess.classList.remove('hidden');
-                    submitBtn.textContent = 'Enviar Mensagem';
-                    submitBtn.disabled = false;
-
-                    setTimeout(function () {
-                        formSuccess.classList.add('hidden');
-                    }, 5000);
-                }, 1500);
-            }
-        });
+    // Validate whatsapp
+    var whatsapp = document.getElementById('c-whatsapp');
+    var whatsappClean = whatsapp.value.replace(/\D/g, '');
+    if (whatsappClean.length < 10 || whatsappClean.length > 11) {
+      showError(whatsapp, 'Insira um número de WhatsApp válido com DDD.');
+      isValid = false;
     }
 
-    function showError(input, message) {
-        input.classList.add('error');
-        var errorSpan = input.parentElement.querySelector('.form-error');
-        if (errorSpan) {
-            errorSpan.textContent = message;
-        }
+    // Validate cidade
+    var cidade = document.getElementById('c-cidade');
+    if (!cidade.value.trim()) {
+      showError(cidade, 'Por favor, insira sua cidade.');
+      isValid = false;
     }
 
-    // WhatsApp mask
-    var whatsappInput = document.getElementById('c-whatsapp');
-    if (whatsappInput) {
-        whatsappInput.addEventListener('input', function (e) {
-            var value = e.target.value.replace(/\D/g, '');
-            if (value.length > 11) value = value.substring(0, 11);
-
-            if (value.length > 6) {
-                e.target.value = '(' + value.substring(0, 2) + ') ' + value.substring(2, 7) + '-' + value.substring(7);
-            } else if (value.length > 2) {
-                e.target.value = '(' + value.substring(0, 2) + ') ' + value.substring(2);
-            } else if (value.length > 0) {
-                e.target.value = '(' + value;
-            }
-        });
+    // Validate tipo
+    var tipo = document.getElementById('c-tipo');
+    if (!tipo.value) {
+      showError(tipo, 'Selecione o tipo do projeto.');
+      isValid = false;
     }
+
+    if (isValid) {
+      // Montar mensagem pro WhatsApp
+      var msg = [
+        "Olá! Vim pelo site e quero um orçamento de Energia Solar ☀️",
+        "",
+        "Nome: " + nome.value.trim(),
+        "WhatsApp: " + whatsapp.value.trim(),
+        "Cidade: " + cidade.value.trim(),
+        "Tipo de projeto: " + tipo.value
+      ].join("\n");
+
+      var waUrl = "https://wa.me/" + WHATSAPP_NUMBER + "?text=" + encodeURIComponent(msg);
+
+      // Feedback visual
+      var submitBtn = contactForm.querySelector('button[type="submit"]');
+      submitBtn.textContent = 'Abrindo WhatsApp...';
+      submitBtn.disabled = true;
+
+      // Abre WhatsApp
+      window.open(waUrl, '_blank', 'noopener,noreferrer');
+
+      // Reset + sucesso
+      setTimeout(function () {
+        contactForm.reset();
+        if (formSuccess) formSuccess.classList.remove('hidden');
+
+        submitBtn.textContent = 'Enviar Mensagem';
+        submitBtn.disabled = false;
+
+        setTimeout(function () {
+          if (formSuccess) formSuccess.classList.add('hidden');
+        }, 5000);
+      }, 600);
+    }
+  });
+}
+
+function showError(input, message) {
+  input.classList.add('error');
+  var errorSpan = input.parentElement.querySelector('.form-error');
+  if (errorSpan) {
+    errorSpan.textContent = message;
+  }
+}
+
+// WhatsApp mask
+var whatsappInput = document.getElementById('c-whatsapp');
+if (whatsappInput) {
+  whatsappInput.addEventListener('input', function (e) {
+    var value = e.target.value.replace(/\D/g, '');
+    if (value.length > 11) value = value.substring(0, 11);
+
+    if (value.length > 6) {
+      e.target.value =
+        '(' + value.substring(0, 2) + ') ' +
+        value.substring(2, 7) + '-' +
+        value.substring(7);
+    } else if (value.length > 2) {
+      e.target.value =
+        '(' + value.substring(0, 2) + ') ' +
+        value.substring(2);
+    } else if (value.length > 0) {
+      e.target.value = '(' + value;
+    }
+  });
+}
+
 
     // ===== WHATSAPP BUTTON SHOW ON SCROLL =====
     var whatsappBtn = document.getElementById('whatsapp-btn');
